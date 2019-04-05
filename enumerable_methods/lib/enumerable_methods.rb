@@ -4,14 +4,14 @@ module Enumerable
     for i in self
       yield(i)
     end
-    return self
+    self
   end
 
   def my_each_with_index
     (0..self.length - 1).my_each do |x|
       yield(self[x], x)
     end
-    return self
+    self
   end
 
   def my_select
@@ -49,6 +49,13 @@ module Enumerable
   def my_count
     n = 0
     self.my_each { n += 1 }
+    n
+  end
+
+  def my_inject(n=self[0])
+    self.my_each do |x|
+      n = yield(n,x)
+    end
     n
   end
 end
