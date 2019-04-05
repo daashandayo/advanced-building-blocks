@@ -10,7 +10,7 @@ def bubble_sort_by(array)
       end
     end
     n -= 1
-    break if !swapped
+    break unless swapped
   end
-  return array
+  array
 end

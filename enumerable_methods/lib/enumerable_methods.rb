@@ -8,7 +8,7 @@ module Enumerable
   end
 
   def my_each_with_index
-    (0..self.length - 1).my_each do |x|
+    (0..length - 1).my_each do |x|
       yield(self[x], x)
     end
     self
@@ -16,7 +16,7 @@ module Enumerable
 
   def my_select
     arr = []
-    self.my_each do |x|
+    my_each do |x|
       arr << x if yield(x)
     end
     arr
@@ -24,7 +24,7 @@ module Enumerable
 
   def my_all?
     status = true
-    self.my_each do |x|
+    my_each do |x|
       return !status unless yield(x)
     end
     status
@@ -32,7 +32,7 @@ module Enumerable
 
   def my_any?
     status = false
-    self.my_each do |x|
+    my_each do |x|
       return !status if yield(x)
     end
     status
@@ -40,7 +40,7 @@ module Enumerable
 
   def my_none?
     status = true
-    self.my_each do |x|
+    my_each do |x|
       return !status if yield(x)
     end
     status
@@ -48,14 +48,14 @@ module Enumerable
 
   def my_count
     n = 0
-    self.my_each { n += 1 }
+    my_each { n += 1 }
     n
   end
 
-  def my_inject(n=self[0])
-    self.my_each do |x|
-      n = yield(n,x)
+  def my_inject(memo = self[0])
+    my_each do |x|
+      memo = yield(memo, x)
     end
-    n
+    memo
   end
 end
